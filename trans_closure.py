@@ -60,7 +60,7 @@ def parse_grammar_hom(filename):
     return gr
 
 
-if __name__ == 'main':
+if __name__ == '__main__':
 
     if len(sys.argv) < 3:
         print("len of arguments < 3, please, start the script like this:"
