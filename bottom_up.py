@@ -1,7 +1,7 @@
+# python3 bottom_up.py data/grammars/my_test_grammar data/graphs/my_test_graph [result.txt]
 from utils import parse_graph
 from collections import defaultdict
 import sys
-# python3 bottom_up.py data/grammars/my_test_grammar data/graphs/my_test_graph [result.txt]
 
 
 def parse_grammar(filename):
