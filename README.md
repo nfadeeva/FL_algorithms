@@ -4,11 +4,11 @@ python3
 
 ## How to run every algorithm:
 ``` 
-python3 bottom_up.py data/my_test_grammar data/my_test_graph result.txt
+python3 bottom_up.py data/grammars/my_test_grammar data/graphs/my_test_graph result.txt
 ```
 
 ```
-python3 trans_closure.py data/my_test_grammar data/my_test_graph result.txt
+python3 trans_closure.py data/grammars/my_test_grammar data/graphs/my_test_graph result.txt
 ```
 ## Unittest
 ### There are two tests: 
