@@ -18,5 +18,5 @@ python3 trans_closure.py data/grammars/my_test_grammar data/graphs/my_test_graph
 - The second test compares results of algorithms for all graphs and grammars in the document
 #### Run test:
 ```
-python3 test.py
+python3 -m unittest test.py
 ```

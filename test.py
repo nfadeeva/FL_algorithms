@@ -52,10 +52,10 @@ pizza.dot'''.split('\n')))
         Q1, eps_nonterminals_q1= parse_grammar('data/grammars/Q1')
 
         for graph, answer in zip(graphs,right_q1):
-            res = trans_closure(graph, Q1_hom)
+            res = trans_closure(graph[:], Q1_hom)
             self.assertEqual(len(list(filter(lambda x: x[1] =='S', res))), answer)
 
-            res = bottom_up(graph, Q1, eps_nonterminals_q1)
+            res = bottom_up(graph[:], Q1, eps_nonterminals_q1)
             self.assertEqual(len(list(filter(lambda x: x[1] == 'S', res))), answer)
 
         # q2
@@ -74,11 +74,10 @@ pizza.dot'''.split('\n')))
         Q2, eps_nonterminals_q2 = parse_grammar('data/grammars/Q2')
         Q2_hom = parse_grammar_hom('data/grammars/Q2_hom')
 
-        for graph, answer in zip(graphs, right_q2):
-            res = trans_closure(graph, Q2_hom)
+        for graph, answer in zip(graphs[8:], right_q2[8:]):
+            res = trans_closure(graph[:], Q2_hom)
             self.assertEqual(len(list(filter(lambda x: x[1] == 'S', res))), answer)
-
-            res = bottom_up(graph, Q2, eps_nonterminals_q2)
+            res = bottom_up(graph[:], Q2, eps_nonterminals_q2)
             self.assertEqual(len(list(filter(lambda x: x[1] == 'S', res))), answer)
 
 
