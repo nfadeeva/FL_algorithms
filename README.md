@@ -1,4 +1,6 @@
 # FL_algorithms
+- trans_closure.py
+- bottom_up.py
 ## Requirements:
 python3
 
