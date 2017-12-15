@@ -74,7 +74,7 @@ pizza.dot'''.split('\n')))
         Q2, eps_nonterminals_q2 = parse_grammar('data/grammars/Q2')
         Q2_hom = parse_grammar_hom('data/grammars/Q2_hom')
 
-        for graph, answer in zip(graphs[8:], right_q2[8:]):
+        for graph, answer in zip(graphs, right_q2):
             res = trans_closure(graph[:], Q2_hom)
             self.assertEqual(len(list(filter(lambda x: x[1] == 'S', res))), answer)
             res = bottom_up(graph[:], Q2, eps_nonterminals_q2)
