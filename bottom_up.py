@@ -52,7 +52,7 @@ def bottom_up(R, G, eps_nonterminals):
             for i in range(size) for j in range(size)
             for label in R[i][j] if label in G.keys()]
 
-if __name__ == 'main':
+if __name__ == '__main__':
 
     if len(sys.argv) < 3:
         print("len of arguments < 3, please, start the script like this:"
