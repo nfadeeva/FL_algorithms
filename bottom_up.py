@@ -50,11 +50,11 @@ def bottom_up(R, G, eps_nonterminals):
         for i in range(size):
             traverse(R, i, i, [], G)
         end = time.time()
-        if (end - start) // (60 * 4):
+        if (end - start) // (60 * 3):
             start = time.time()
             cur_res = [(i, label, j)
-                       for i in range(size) for j in range(size)
-                       for label in m[i][j]]
+            for i in range(size) for j in range(size)
+            for label in R[i][j] if label in G.keys()]
             print("test is working, len of result for now = "
                   "{length}".format(length=len(cur_res)))
     return [(i, label, j)
