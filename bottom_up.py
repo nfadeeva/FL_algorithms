@@ -50,7 +50,7 @@ def bottom_up(R, G, eps_nonterminals):
         for i in range(size):
             traverse(R, i, i, [], G)
         end = time.time()
-        if (end - start) // (60 * 3):
+        if (end - start) // 60:
             start = time.time()
             cur_res = [(i, label, j)
             for i in range(size) for j in range(size)

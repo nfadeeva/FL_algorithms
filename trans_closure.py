@@ -36,7 +36,7 @@ def trans_closure(R, G):
                         for j_ in m[k][j]:
                             for z in G.R.get((i_, j_),[]):
                                     end = time.time()
-                                    if (end - start) // (60 * 4):
+                                    if (end - start) // 60:
                                         start = time.time()
                                         cur_res = [(i, label, j)
                                          for i in range(size) for j in range(size)

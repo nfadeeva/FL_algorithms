@@ -65,6 +65,7 @@ pizza.dot'''.split('\n')))
             self.assertEqual(len(list(filter(lambda x: x[1] == 'S', res))), answer)
             print("test for {graph} and {grammar}- bottom_up OK".format(
                 graph=os.path.basename(graph), grammar='Q1'))
+            print()
 
         # q2
         right_q2 = list(map(int,'''1
@@ -93,6 +94,7 @@ pizza.dot'''.split('\n')))
             self.assertEqual(len(list(filter(lambda x: x[1] == 'S', res))), answer)
             print("test for {graph} and {grammar}- bottom_up OK".format(
                 graph=os.path.basename(graph), grammar='Q2'))
+            print()
 
 
 
