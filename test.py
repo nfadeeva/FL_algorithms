@@ -86,7 +86,6 @@ pizza.dot'''.split('\n')))
 
         for graph, answer in zip(graphs, right_q2):
             res = trans_closure(parse_graph(graph), Q2_hom)
-            graph = os.path.basename(graph)
             print("start test for {graph} and {grammar}".format(
                 graph=os.path.basename(graph), grammar='Q2'))
             self.assertEqual(len(list(filter(lambda x: x[1] == 'S', res))), answer)
