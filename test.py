@@ -8,7 +8,6 @@ import os
 class Tests(unittest.TestCase):
 
     def test_my_example(self):
-        R = parse_graph("data/graphs/my_test_graph")
         right_result = {(0, 'S1', 0), (0, 'S5', 0),
                         (0, 'S', 0), (0, 'S3', 1),
                         (0, 'S', 2), (0, 'S6', 2),
@@ -17,12 +16,15 @@ class Tests(unittest.TestCase):
                         (2, 'S2', 0), (2, 'S4', 2)}
 
         G, eps_nonterminals = parse_grammar("data/grammars/my_test_grammar")
-        result_bottom_up = bottom_up(R, G, eps_nonterminals)
+        result_bottom_up = bottom_up(parse_graph("data/graphs/my_test_graph"), G, eps_nonterminals)
         self.assertEqual(set(result_bottom_up), right_result)
+        print("test for my_graph and my_grammar - bottom_up - OK")
 
         G_hom = parse_grammar_hom("data/grammars/my_test_grammar")
-        result_closure = trans_closure(R, G_hom)
+        result_closure = trans_closure(parse_graph("data/graphs/my_test_graph"), G_hom)
         self.assertEqual(set(result_closure), right_result)
+        print("test for my_graph and my_grammar - trans_closure - OK")
+
 
     def test_all_graphs_and_grammars(self):
         graphs = list(map(lambda x: 'data/graphs/data/' + x,
