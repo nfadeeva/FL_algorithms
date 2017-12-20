@@ -2,6 +2,8 @@ import unittest
 from trans_closure import *
 from bottom_up import *
 from utils import parse_graph
+import os
+
 
 class Tests(unittest.TestCase):
 
@@ -53,10 +55,16 @@ pizza.dot'''.split('\n')))
 
         for graph, answer in zip(graphs,right_q1):
             res = trans_closure(parse_graph(graph), Q1_hom)
+            print("start test for {graph} and {grammar}".format(
+                graph=os.path.basename(graph), grammar='Q1'))
             self.assertEqual(len(list(filter(lambda x: x[1] =='S', res))), answer)
+            print("test for {graph} and {grammar}- trans_closure OK".format(
+                graph=os.path.basename(graph), grammar='Q1'))
 
             res = bottom_up(parse_graph(graph), Q1, eps_nonterminals_q1)
             self.assertEqual(len(list(filter(lambda x: x[1] == 'S', res))), answer)
+            print("test for {graph} and {grammar}- bottom_up OK".format(
+                graph=os.path.basename(graph), grammar='Q1'))
 
         # q2
         right_q2 = list(map(int,'''1
@@ -75,9 +83,17 @@ pizza.dot'''.split('\n')))
 
         for graph, answer in zip(graphs, right_q2):
             res = trans_closure(parse_graph(graph), Q2_hom)
+            graph = os.path.basename(graph)
+            print("start test for {graph} and {grammar}".format(
+                graph=os.path.basename(graph), grammar='Q2'))
             self.assertEqual(len(list(filter(lambda x: x[1] == 'S', res))), answer)
+            print("test for {graph} and {grammar} - trans_closure OK".format(
+                graph=os.path.basename(graph), grammar='Q2'))
             res = bottom_up(parse_graph(graph), Q2, eps_nonterminals_q2)
             self.assertEqual(len(list(filter(lambda x: x[1] == 'S', res))), answer)
+            print("test for {graph} and {grammar}- bottom_up OK".format(
+                graph=os.path.basename(graph), grammar='Q2'))
+
 
 
 

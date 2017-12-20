@@ -3,6 +3,7 @@ import re
 from collections import defaultdict
 from utils import parse_graph
 import sys
+import time
 
 
 class Grammar:
@@ -25,6 +26,7 @@ def trans_closure(R, G):
                 if element in G.T:
                     m[i][j].extend(G.R[(element,)])
 
+    start = time.time()
     while flag:
         flag = False
         for i in range(size):
@@ -33,9 +35,19 @@ def trans_closure(R, G):
                     for i_ in m[i][k]:
                         for j_ in m[k][j]:
                             for z in G.R.get((i_, j_),[]):
+                                    end = time.time()
+                                    if (end - start) // (60 * 4):
+                                        start = time.time()
+                                        cur_res = [(i, label, j)
+                                         for i in range(size) for j in range(size)
+                                         for label in m[i][j]]
+                                        print("test is working, len of result for now = "
+                                              "{length}".format(length=len(cur_res)))
                                     if z not in m[i][j]:
                                         m[i][j].append(z)
                                         flag = True
+
+
     return [(i, label, j)
             for i in range(size) for j in range(size)
             for label in m[i][j]]

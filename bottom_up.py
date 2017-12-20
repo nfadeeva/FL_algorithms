@@ -1,7 +1,7 @@
 # python3 bottom_up.py data/grammars/my_test_grammar data/graphs/my_test_graph [result.txt]
 from utils import parse_graph
 from collections import defaultdict
-import sys
+import time
 
 
 def parse_grammar(filename):
@@ -43,11 +43,20 @@ def bottom_up(R, G, eps_nonterminals):
     for i in range(size):
         R[i][i].extend(eps_nonterminals)
     flag = True
+    start = time.time()
     while flag:
         flag = False
         max_len = max(len(x) for k in G.values() for x in k)
         for i in range(size):
             traverse(R, i, i, [], G)
+        end = time.time()
+        if (end - start) // (60 * 4):
+            start = time.time()
+            cur_res = [(i, label, j)
+                       for i in range(size) for j in range(size)
+                       for label in m[i][j]]
+            print("test is working, len of result for now = "
+                  "{length}".format(length=len(cur_res)))
     return [(i, label, j)
             for i in range(size) for j in range(size)
             for label in R[i][j] if label in G.keys()]
