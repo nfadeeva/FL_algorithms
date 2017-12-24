@@ -5,10 +5,10 @@ from utils import parse_graph
 import os
 
 
-BOTTOM_UP = False
-TRANS_CLOSURE = False
+BOTTOM_UP = True
+TRANS_CLOSURE = True
 GLL = True
-NUM = -6
+NUM = 9
 
 
 def test_my_example():
