@@ -82,9 +82,10 @@ if __name__ == '__main__':
     G1 = parse_grammar_hom(sys.argv[1])
     graph = parse_graph(sys.argv[2])
     result = trans_closure(graph, G1)
-
+    print(G1.R, G1.T)
     if len(sys.argv) == 3:
-        print('\n'.join(map(str,result)))
+        pass
+        #print('\n'.join(map(str,result)))
     else:
         with open(sys.argv[3],'w') as f:
             f.write('\n'.join(map(str,result)))

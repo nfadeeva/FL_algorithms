@@ -96,7 +96,7 @@ def gll(R, g):
                         if gss_node1 in poped:
                             # pop
                             for v in poped[gss_node1]:
-                                if (v, j_grammar, gss_node1) not in history:
+                                if (v, j_grammar, gss_node) not in history:
                                     working_list.add((v, j_grammar, gss_node))
                     # 1 case
                     for label_graph in labels_graph:
@@ -120,4 +120,3 @@ if __name__ == '__main__':
     else:
         with open(sys.argv[3],'w') as f:
             f.write('\n'.join(map(str, result)))
-
