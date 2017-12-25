@@ -29,7 +29,7 @@ python3 gll.py data/grammars/my_test_grammar_automata data/graphs/my_test_graph 
 ### There are two tests: 
 - First test is my example for data/grammars/my_test_grammar and data/graphs/my_test_graph
 - The second test compares results of algorithms for all graphs and grammars in the document
-#### Run all test:
+#### Run all tests:
 ```
 pytest test.py -s
 ```
@@ -41,12 +41,14 @@ pytest test.py::test_my_example -s
 ```
 pytest test.py::test_doc_graphs -s
 ```
+Now test_doc_graphs run on all graphs, grammars and algorithms
+
 You can change settings of test_doc_graphs in test.py to specify which grammar, algorithm would you like to test and set up the number of graphs from the document
 ```
 BOTTOM_UP = True
 TRANS_CLOSURE = True
 GLL = True
-NUM = 11 # number of graphs to test (0..11)
+NUM = 11 # it means that test will be run from 0 to 11 graph
 Q1_ = True
 Q2_ = True
 ```
