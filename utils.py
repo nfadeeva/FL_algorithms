@@ -28,14 +28,16 @@ def parse_grammar_hom(filename):
         lines = f.readlines()
     gr = GrammarHom()
     for line in lines:
-        rule = re.findall(r'(\w+) -> (\w+) (\w+)', line)
+        line = line.replace(" -> ",'->')
+        line = line.replace(" = ",'=')
+        rule = re.findall(r'(\w+)->(\w+) (\w+)', line)
         if rule:
             left, right_1, right_2 = rule[0]
             gr.R[(right_1, right_2)].append(left)
 
         # rule looks like S -> a
         else:
-            rule = re.findall(r'(\w+) -> (\w+)', line)
+            rule = re.findall(r'(\w+)->(\w+)', line)
             left, terminal = rule[0]
             gr.T.add(terminal)
             gr.R[(terminal,)].append(left)
@@ -82,6 +84,7 @@ def parse_grammar_automata(filename):
 
     # fill starts
     for line in lines[3:]:
+        line = line.replace(" = ", '=')
         line_ = re.findall('(\d+)\[label="(\w+)", \w*color="green"\]', line)
         if line_:
             state, nonterminal = line_[0]
@@ -89,13 +92,16 @@ def parse_grammar_automata(filename):
 
     # fill fins
     for line in lines[3:]:
+        line = line.replace(" = ", '=')
         line_ = re.findall('(\d+)\[label="(\w+)", shape="doublecircle"*', line)
         if line_:
             state, nonterminal = line_[0]
             g.fins[nonterminal].append(int(state))
 
     for line in lines[3:]:
-        line_ = re.findall('(\d+) -> (\d+)\[label = "(\w+|.)"\]', line)
+        line = line.replace(" -> ",'->')
+        line = line.replace(" = ",'=')
+        line_ = re.findall('(\d+)->(\d+)\[label="(\w+|.)"\]', line)
         if line_:
             i, j, label = line_[0]
             g.G[int(i)][int(j)].append(label)
@@ -113,7 +119,9 @@ def parse_graph(filename):
         size = lines[2].count(";")
         R = [[[] for i in range(size)] for i in range(size)]
         for line in lines[2:]:
-            line_ = re.findall('(\d+) -> (\d+)\[label="(\w+|.)"\]', line)
+            line = line.replace(" -> ", '->')
+            line = line.replace(" = ", '=')
+            line_ = re.findall('(\d+)->(\d+)\[label="(\w+|.)"\]', line)
             if line_:
                 i, j, label = line_[0]
                 R[int(i)][int(j)].append(label)
