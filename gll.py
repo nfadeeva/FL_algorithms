@@ -1,6 +1,5 @@
-import re
 from collections import defaultdict
-from utils import parse_graph
+from utils import *
 from itertools import chain
 import sys
 import time
@@ -9,45 +8,6 @@ import time
 class GSS:
     def __init__(self):
         self.v=defaultdict(lambda: defaultdict(set))
-
-
-class GrammarAutomata:
-    def __init__(self):
-        self.starts = defaultdict(list)
-        self.fins = defaultdict(list)
-        self.terminals = set()
-        self.G = None
-
-
-def parse_grammar_automata(filename):
-    g = GrammarAutomata()
-    with open(filename,'r') as f:
-        lines = f.readlines()
-    size = lines[2].count(";")
-    g.G = [[[] for i in range(size)] for i in range(size)]
-
-    # fill starts
-    for line in lines[3:]:
-        line_ = re.findall('(\d+)\[label="(\w+)", \w*color="green"\]', line)
-        if line_:
-            state, nonterminal = line_[0]
-            g.starts[nonterminal].append(int(state))
-
-    # fill fins
-    for line in lines[3:]:
-        line_ = re.findall('(\d+)\[label="(\w+)", shape="doublecircle"*', line)
-        if line_:
-            state, nonterminal = line_[0]
-            g.fins[nonterminal].append(int(state))
-
-    for line in lines[3:]:
-        line_ = re.findall('(\d+) -> (\d+)\[label = "(\w+|.)"\]', line)
-        if line_:
-            i, j, label = line_[0]
-            g.G[int(i)][int(j)].append(label)
-            if not label.isupper():
-                g.terminals.add(label)
-    return g
 
 
 def gll(R, g):
@@ -88,14 +48,14 @@ def gll(R, g):
                     # 2 case
                     if label_grammar not in g.terminals:
                         gss.v[(label_grammar, i_graph)][gss_node].add(j_grammar)
-                        gss_node1 = (label_grammar, i_graph)
+                        gss_node_new = (label_grammar, i_graph)
                         for st in g.starts[label_grammar]:
-                            working_list.add((i_graph, st, gss_node1))
+                            working_list.add((i_graph, st, gss_node_new))
 
                         # pop again
-                        if gss_node1 in poped:
+                        if gss_node_new in poped:
                             # pop
-                            for v in poped[gss_node1]:
+                            for v in poped[gss_node_new]:
                                 if (v, j_grammar, gss_node) not in history:
                                     working_list.add((v, j_grammar, gss_node))
                     # 1 case

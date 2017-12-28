@@ -1,29 +1,7 @@
 # python3 bottom_up.py data/grammars/my_test_grammar data/graphs/my_test_graph [result.txt]
-from utils import parse_graph
-from collections import defaultdict
+from utils import *
 import time
 import sys
-
-
-class Grammar:
-    def __init__(self):
-        self.G = None
-        self.eps_nonterminals = None
-
-
-def parse_grammar(filename):
-    gr = Grammar()
-    gr.G = defaultdict(list)
-    gr.eps_nonterminals = set()
-    with open(filename) as f:
-        lines = f.readlines()
-        for line in lines:
-            l, r = line.split(' -> ')
-            r = r.rstrip('\n')
-            gr.G[l].append(r.split(' '))
-            if r == "eps":
-                gr.eps_nonterminals.add(l)
-    return gr
 
 
 def bottom_up(R, gr):
@@ -75,12 +53,12 @@ if __name__ == '__main__':
 
     if len(sys.argv) < 3:
         print("len of arguments < 3, please, start the script like this:"
-              "python3 bottom_up.py data/my_test_grammar data/my_test_graph [result.txt]")
+              "python3 bottom_up.py data/my_test_grammar_automata data/my_test_graph [result.txt]")
         sys.exit()
 
-    G = parse_grammar(sys.argv[1])
+    G = parse_grammar_automata(sys.argv[1])
     R = parse_graph(sys.argv[2])
-    result = bottom_up(R, G)
+    result = bottom_up(R, graph_to_grammar(G))
 
     if len(sys.argv) == 3:
         print('\n'.join(map(str,result)))
