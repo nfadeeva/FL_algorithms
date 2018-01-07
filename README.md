@@ -15,11 +15,11 @@ pip3 install pytest
 - gll.py - grammars in graph representation (grammars/*_automata)
 ## How to run every algorithm:
 ``` 
-python3 bottom_up.py data/grammars/my_test_grammar data/graphs/my_test_graph result.txt
+python3 bottom_up.py data/grammars/my_test_grammar_automata data/graphs/my_test_graph result.txt
 ```
 
 ```
-python3 trans_closure.py data/grammars/my_test_grammar_automata data/graphs/my_test_graph result.txt
+python3 trans_closure.py data/grammars/my_test_grammar data/graphs/my_test_graph result.txt
 ```
 
 ```
