@@ -25,7 +25,7 @@ python3 trans_closure.py data/grammars/grammar_hom_0 data/graphs/graph_0 [result
 ```
 python3 gll.py data/grammars/grammar_automata_0 data/graphs/graph_0 [result.txt]
 ```
-## Unittest
+## Unittests
 ### There are five tests: 
 - test_0 (grammar_automata_0, graph_0) -  general test for many difficult cases(cycles in graph and grammar, many labels on one transition)
 - test_1 (grammar_automata_1, graph_1) - grammar with cycle + very simple graph(linear)
@@ -53,7 +53,7 @@ pytest test.py::test_my_example_3 -s
 ```
 pytest test.py::test_doc_graphs -s
 ```
-Now test_doc_graphs run on all graphs, grammars and algorithms
+Test_doc_graphs runs on all graphs, grammars and algorithms
 
 You can change settings of test_doc_graphs in test.py to specify which grammar, algorithm would you like to test and set up the number of graphs from the document
 ```
