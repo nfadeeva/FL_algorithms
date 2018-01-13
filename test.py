@@ -6,14 +6,46 @@ import os
 
 
 BOTTOM_UP = True
-TRANS_CLOSURE = True
-GLL = True
+TRANS_CLOSURE = False
+GLL = False
 NUM = 11
 Q1_ = True
 Q2_ = True
 
 
-def test_my_example():
+def helper_function(grammar_hom, grammar_automata, graph_name, right_result):
+    G_hom = parse_grammar_hom(grammar_hom)
+    G_automata = parse_grammar_automata(grammar_automata)
+
+    if TRANS_CLOSURE:
+        result_closure = trans_closure(parse_graph(graph_name), G_hom)
+        assert set(result_closure) == right_result
+        print("test for {grammar_hom} and {graph_name}"
+              " - trans_closure - OK"
+              .format(grammar_hom=os.path.basename(grammar_hom),
+                      graph_name=os.path.basename(graph_name)))
+        print()
+
+    if BOTTOM_UP:
+        result_bottom_up = bottom_up(parse_graph(graph_name), G_automata)
+        assert set(result_bottom_up) == right_result
+        print("test for {grammar_automata} and {graph_name}"
+              " - bottom_up - OK"
+              .format(grammar_automata=os.path.basename(grammar_automata),
+                      graph_name=os.path.basename(graph_name)))
+        print()
+
+    if GLL:
+        result_gll = gll(parse_graph(graph_name), G_automata)
+        assert set(result_gll) == right_result
+        print("test for {grammar_automata} and {graph_name}"
+              " - gll - OK"
+              .format(grammar_automata=os.path.basename(grammar_automata),
+                      graph_name=os.path.basename(graph_name)))
+        print()
+
+
+def test_my_example_0():
     right_result = {(0, 'S1', 0), (0, 'S5', 0),
                     (0, 'S', 0), (0, 'S3', 1),
                     (0, 'S', 2), (0, 'S6', 2),
@@ -21,26 +53,40 @@ def test_my_example():
                     (1, 'S', 2), (1, 'S6', 2),
                     (2, 'S2', 0), (2, 'S4', 2)}
 
-    G_hom = parse_grammar_hom("data/grammars/my_test_grammar")
-    G_automata = parse_grammar_automata("data/grammars/my_test_grammar_automata")
-    G = graph_to_grammar(G_automata)
-    if TRANS_CLOSURE:
-        result_closure = trans_closure(parse_graph("data/graphs/my_test_graph"), G_hom)
-        assert set(result_closure) == right_result
-        print("test for my_graph and my_grammar - trans_closure - OK")
-        print()
+    grammar_hom = "data/grammars/grammar_hom_0"
+    grammar_automata = "data/grammars/grammar_automata_0"
+    graph_name = "data/graphs/graph_0"
+    helper_function(grammar_hom, grammar_automata, graph_name, right_result)
 
-    if BOTTOM_UP:
-        result_bottom_up = bottom_up(parse_graph("data/graphs/my_test_graph"), G)
-        assert set(result_bottom_up) ==right_result
-        print("test for my_graph and my_grammar - bottom_up - OK")
-        print()
 
-    if GLL:
-        result_gll = gll(parse_graph("data/graphs/my_test_graph"), G_automata)
-        assert set(result_gll) ==right_result
-        print("test for my_graph and my_grammar - gll - OK")
-        print()
+# grammar with cycle, simple graph
+def test_my_example_1():
+    right_result = {(0, 'S', 1)}
+    grammar_hom = "data/grammars/grammar_hom_1"
+    grammar_automata = "data/grammars/grammar_automata_1"
+    graph_name = "data/graphs/graph_1"
+    helper_function(grammar_hom, grammar_automata, graph_name, right_result)
+
+
+# grammar with cycle and graph with cycle
+def test_my_example_2():
+    right_result = {(0, 'S', 0), (0, 'S', 1), (0, 'S', 2),
+                    (1, 'S', 1), (1, 'S', 0), (1, 'S', 2),
+                    (2, 'S', 1), (2, 'S', 0), (2, 'S', 2)
+                    }
+    grammar_hom = "data/grammars/grammar_hom_1"
+    grammar_automata = "data/grammars/grammar_automata_1"
+    graph_name = "data/graphs/graph_1_1"
+    helper_function(grammar_hom, grammar_automata, graph_name, right_result)
+
+
+# grammar_1 with eps
+def test_my_example_3():
+    right_result = {(0, 'S', 0), (0, 'S', 1),(1, 'S', 1)}
+    grammar_hom = "data/grammars/grammar_hom_2"
+    grammar_automata = "data/grammars/grammar_automata_2"
+    graph_name = "data/graphs/graph_1"
+    helper_function(grammar_hom, grammar_automata, graph_name, right_result)
 
 
 def test_doc_graphs():
@@ -54,7 +100,6 @@ def test_doc_graphs():
 
         Q1_hom = parse_grammar_hom('data/grammars/Q1_hom')
         Q1_automata= parse_grammar_automata('data/grammars/Q1_automata')
-        Q1 = graph_to_grammar(Q1_automata)
 
         graphs = graphs[:NUM]
         right_q1= right_q1[:NUM]
@@ -67,12 +112,14 @@ def test_doc_graphs():
                 assert (len(list(filter(lambda x: x[1] == 'S', res)))) == answer
                 print("test for {graph} and {grammar}- trans_closure OK".format(
                     graph=os.path.basename(graph), grammar='Q1'))
+                print()
 
             if BOTTOM_UP:
-                res = bottom_up(parse_graph(graph), Q1)
+                res = bottom_up(parse_graph(graph), Q1_automata)
                 assert (len(list(filter(lambda x: x[1] == 'S', res)))) == answer
                 print("test for {graph} and {grammar}- bottom_up OK".format(
                     graph=os.path.basename(graph), grammar='Q1'))
+                print()
 
             if GLL:
                 res = gll(parse_graph(graph), Q1_automata)
@@ -87,7 +134,6 @@ def test_doc_graphs():
             right_q2 = [int(x) for x in f.read().splitlines()]
         Q2_hom = parse_grammar_hom('data/grammars/Q2_hom')
         Q2_automata = parse_grammar_automata('data/grammars/Q2_automata')
-        Q2 = graph_to_grammar(Q2_automata)
 
         graphs = graphs[:NUM]
         right_q2= right_q2[:NUM]
@@ -104,7 +150,7 @@ def test_doc_graphs():
 
 
             if BOTTOM_UP:
-                res = bottom_up(parse_graph(graph), Q2)
+                res = bottom_up(parse_graph(graph), Q2_automata)
                 assert (len(list(filter(lambda x: x[1] == 'S', res)))) == answer
                 print("test for {graph} and {grammar}- bottom_up OK".format(
                     graph=os.path.basename(graph), grammar='Q2'))

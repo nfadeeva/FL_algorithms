@@ -11,6 +11,7 @@ def trans_closure(R, G):
 
     # replace terminals with nonterminals
     for i in range(size):
+        m[i][i].extend(G.eps_nonterminals)
         for j in range(size):
             for element in R[i][j]:
                 if element in G.T:

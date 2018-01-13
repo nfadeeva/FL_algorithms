@@ -1,5 +1,5 @@
-S -> S1 S5
-S -> S3 S6
+S->S1 S5
+S->S3 S6
 S -> S1 S2
 S -> S3 S4
 S5 -> S S2

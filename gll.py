@@ -1,4 +1,3 @@
-from collections import defaultdict
 from utils import *
 from itertools import chain
 import sys
@@ -62,7 +61,6 @@ def gll(R, g):
                     for label_graph in labels_graph:
                         if label_grammar == label_graph and label_grammar in g.terminals:
                             working_list.add((j_graph, j_grammar, gss_node))
-
     return res
 
 if __name__ == '__main__':
@@ -72,8 +70,10 @@ if __name__ == '__main__':
               "python3 gll.py data/my_test_grammar_automata data/my_test_graph [result.txt]")
         sys.exit()
 
+
     G = parse_grammar_automata(sys.argv[1])
     R = parse_graph(sys.argv[2])
+    print(G.starts, G.fins, G.G, R)
     result = gll(R, G)
     if len(sys.argv) == 3:
         print('\n'.join(map(str, result)))
