@@ -6,8 +6,8 @@ import os
 
 
 BOTTOM_UP = True
-TRANS_CLOSURE = False
-GLL = False
+TRANS_CLOSURE = True
+GLL = True
 NUM = 11
 Q1_ = True
 Q2_ = True
