@@ -19,7 +19,7 @@ def helper_function(grammar_hom, grammar_automata, graph_name, right_result):
 
     if TRANS_CLOSURE:
         result_closure = trans_closure(parse_graph(graph_name), G_hom)
-        assert set(result_closure) == right_result
+        assert set(filter(lambda x: x[1]=='S',result_closure)) == right_result
         print("test for {grammar_hom} and {graph_name}"
               " - trans_closure - OK"
               .format(grammar_hom=os.path.basename(grammar_hom),
@@ -59,7 +59,7 @@ def test_my_example_0():
     helper_function(grammar_hom, grammar_automata, graph_name, right_result)
 
 
-# grammar with cycle, simple graph
+# grammar with cycle and the same graph (1^*2)
 def test_my_example_1():
     right_result = {(0, 'S', 1)}
     grammar_hom = "data/grammars/grammar_hom_1"
@@ -68,17 +68,31 @@ def test_my_example_1():
     helper_function(grammar_hom, grammar_automata, graph_name, right_result)
 
 
-# grammar with cycle and graph with cycle
+# grammar with cycle and linear graph
 def test_my_example_2():
-    right_result = {(0, 'S', 0), (0, 'S', 1), (0, 'S', 2),
-                    (1, 'S', 1), (1, 'S', 0), (1, 'S', 2),
-                    (2, 'S', 1), (2, 'S', 0), (2, 'S', 2)
+    right_result = {(0, 'S', 1), (0, 'S', 2),(0, 'S', 3),(0, 'S', 4),
+                    (1, 'S', 2), (1, 'S', 3),(1, 'S', 4),
+                    (2, 'S', 3),(2, 'S', 4),
+                    (3, 'S', 4)
                     }
-    grammar_hom = "data/grammars/grammar_hom_1"
-    grammar_automata = "data/grammars/grammar_automata_1"
-    graph_name = "data/graphs/graph_1_1"
+    grammar_hom = "data/grammars/grammar_hom_3"
+    grammar_automata = "data/grammars/grammar_automata_3"
+    graph_name = "data/graphs/graph_2"
     helper_function(grammar_hom, grammar_automata, graph_name, right_result)
 
+# grammar with cycle and graph with the cycle
+def test_my_example_4():
+    right_result = {(0, 'S', 0),(0, 'S', 1), (0, 'S', 2),(0, 'S', 3),(0, 'S', 4),
+                    (1, 'S', 0), (1, 'S', 1),(1, 'S', 2), (1, 'S', 3),(1, 'S', 4),
+                    (2, 'S', 0), (2, 'S', 1), (2, 'S', 2), (2, 'S', 3), (2, 'S', 4),
+                    (3, 'S', 0), (3, 'S', 1), (3, 'S', 2), (3, 'S', 3), (3, 'S', 4),
+                    (4, 'S', 0), (4, 'S', 1), (4, 'S', 2), (4, 'S', 3), (4, 'S', 4),
+
+                    }
+    grammar_hom = "data/grammars/grammar_hom_3"
+    grammar_automata = "data/grammars/grammar_automata_3"
+    graph_name = "data/graphs/graph_3"
+    helper_function(grammar_hom, grammar_automata, graph_name, right_result)
 
 # grammar_1 with eps
 def test_my_example_3():
