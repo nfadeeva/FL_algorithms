@@ -15,7 +15,7 @@ grammar with cycle and the previous graph with cycle
 grammar anbn and graph with two coprime cycles
 ### test_3 (grammar_automata_2, graph_5) 
 grammar 1* with eps + simple graph
-- The last test compares results of algorithms for all graphs and grammars in the document
+### The last test compares results of algorithms for all graphs and grammars in the document
 #### Run all tests:
 ```
 pytest test.py -s
