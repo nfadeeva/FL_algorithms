@@ -1,0 +1,12 @@
+digraph g
+{
+0;1;2;3;
+rankdir = LR
+0[label="S", color="green"]
+3[label="S", shape="doublecircle"]
+
+0 -> 1[label = "a"]
+1 -> 2[label = "S"]
+2 -> 3[label="b"]
+1 -> 3[label="b"]
+}
