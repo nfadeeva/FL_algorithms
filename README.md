@@ -1,3 +1,27 @@
+# FL_algorithms
+- trans_closure.py
+- bottom_up.py
+- gll.py
+## Requirements:
+python3 and pytest
+
+### How to install pytest:
+``` 
+pip3 install pytest
+``` 
+## Input data:
+- trans_closure.py - grammar in Chomsky normal form (grammars/*_hom)
+- bottom_up.py - grammars in graph representation (grammars/*_automata)
+- gll.py - grammars in graph representation (grammars/*_automata)
+## How to run every algorithm:
+``` 
+python3 bottom_up.py data/grammars/grammar_automata_0 data/graphs/graph_0 [result.txt]
+```
+
+```
+python3 trans_closure.py data/grammars/grammar_hom_0 data/graphs/graph_0 [result.txt]
+```
+
 ```
 python3 gll.py data/grammars/grammar_automata_0 data/graphs/graph_0 [result.txt]
 ```
