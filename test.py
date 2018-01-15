@@ -68,7 +68,8 @@ def test_my_example_1():
     grammar_hom = "data/grammars/grammar_hom_1"
     grammar_automata = "data/grammars/grammar_automata_1"
     graph_name = "data/graphs/graph_1"
-    helper_function(grammar_hom, grammar_automata, graph_name, right_result)
+    helper_function(grammar_hom, grammar_automata, graph_name, right_result,
+                    func_automata=lambda x: set(filter(lambda x: x[1]=='S',x[0])) == x[1])
 
 
 # grammar with cycle and linear graph (S-> S S S, S-> S S, S->a + a->a->a->a)
